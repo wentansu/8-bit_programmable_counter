@@ -33,4 +33,6 @@ module tt_um_wentansu_counter (
     assign uio_out = 0;
     assign uio_oe = 0;
 
+    wire _unused = &{ena, ui_in[7:3]};
+
 endmodule

@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+This project implements an 8-bit programmable counter.
 
 ## How to test
 
-Explain how to use your project
+The bidirectional pins are used to load the counter with an 8-bit value. Input pins 0, 1, and 2 are used to enable synchronous load, enable counting (incrementing), and enable output (0 simulates high Z) respectively. The output pins represents the value stored in the counter.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+None.
