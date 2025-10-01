@@ -5,6 +5,8 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
+def display_output(dut, cycle: int, value: int) -> None:
+    dut._log.info(f"Output after cycle {cycle}: {value}")
 
 @cocotb.test()
 async def test_project(dut):
@@ -27,12 +29,14 @@ async def test_project(dut):
 
     # Set the input values you want to test
     dut.ui_in.value = 0b110
-    dut.uio_in.value = 30
+    dut.uio_in.value = 0b11110
+
+    cycle = 0
 
     # Wait for one clock cycle to see the output values
     await ClockCycles(dut.clk, 1)
-
-    dut._log.info(f"Output value: {dut.uo_out.value}")
+    cycle += 1
+    display_output(dut, cycle, dut.uo_out.value)
 
     # The following assersion is just an example of how to check the output values.
     # Change it to match the actual expected output of your module:
@@ -42,5 +46,20 @@ async def test_project(dut):
     # one or more clock cycles, and asserting the expected output values.
 
     await ClockCycles(dut.clk, 1)
+    cycle += 1
+    display_output(dut, cycle, dut.uo_out.value)
 
-    dut._log.info(f"Output value: {dut.uo_out.value}")
+    dut.ui_in.value = 0b111
+    await ClockCycles(dut.clk, 2)
+    cycle += 2
+    display_output(dut, cycle, dut.uo_out.value)
+
+    dut.ui_in.value = 0b110
+    await ClockCycles(dut.clk, 16)
+    cycle += 16
+    display_output(dut, cycle, dut.uo_out.value)
+
+    dut.ui_in.value = 0b010
+    await ClockCycles(dut.clk, 1)
+    cycle += 1
+    display_output(dut, cycle, dut.uo_out.value)
