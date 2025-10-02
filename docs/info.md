@@ -14,6 +14,7 @@ This project implements an 8-bit programmable counter. It has a tri-state output
 ## How to test
 
 | Pins | Usage |
+| ---- | ----- |
 | ui[0] | load the value from uio[7:0] to counter |
 | ui[1] | increment counter value, if 0 the counter will stop incrementing its value |
 | ui[2] | enable output, 0 will produce high Z |
