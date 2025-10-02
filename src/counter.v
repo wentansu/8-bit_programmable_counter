@@ -13,23 +13,25 @@ module tt_um_wentansu_counter (
     wire increment = ui_in[1];
     wire out_enable = ui_in[2];
 
-    reg [7:0] value = 8'b0;
+    reg [7:0] value = 8'b0; // Value stored in counter
 
     always @(posedge clk) begin
         if (!rst_n) begin
-            value[7:0] <= 8'b0;
+            value[7:0] <= 8'b0; // Reset value to 0
         end
 
         else if (load) begin
-            value[7:0] <= uio_in[7:0];
+            value[7:0] <= uio_in[7:0]; // Load input value into counter
         end
 
         else if (increment) begin
-            value[7:0] <= value[7:0] + 8'b1;
+            value[7:0] <= value[7:0] + 8'b1; // Increment counter value by 1
         end
     end
 
-    assign uo_out[7:0] = out_enable ? value[7:0] : 8'b0;
+    assign uo_out[7:0] = out_enable ? value[7:0] : 8'bZ; // If output enable is 0, output high Z
+
+    // Bidirectional pins are not used
     assign uio_out = 0;
     assign uio_oe = 0;
 
